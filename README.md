@@ -1,8 +1,8 @@
-# Temperans
+# temperans
 
 Trajectory intelligence for human-agent-tool interactions.
 
-Temperans maintains persistent trajectories across conversations, agents,
+temperans maintains persistent trajectories across conversations, agents,
 and tools and provides behavioral and operational perception over those
 trajectories.
 
