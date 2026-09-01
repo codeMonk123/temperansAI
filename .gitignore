@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets / credentials
+.env
+.env.*
+*.pem
+*.key
+.pypirc
+
+# Research / training data
+data/
+
+# Experimental outputs
+experiments*.json
+experiments*.jsonl
+*_results.json
+*_X.npy
+*_y.npy
+
+# Temporary files
+*.bak
+*.tmp
+
+# Root-level generated model/checkpoint artifacts
+/*.pt
+/*.pkl
+/*.npy
+/*.jsonl
+
+# Local experimental artifacts
+/wildchat_schema.txt

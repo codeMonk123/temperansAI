@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "temperans"
+version = "0.1.0a1"
+description = "Trajectory intelligence for human-agent-tool interactions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+
+authors = [
+    {name = "Bhushan Jain, CTO, temperans AI"}
+]
+
+keywords = [
+    "ai",
+    "agents",
+    "trajectory",
+    "observability",
+    "llm",
+    "multi-agent"
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License"
+]
+
+dependencies = [
+    "scikit-learn==1.5.2"
+]
+
+[project.optional-dependencies]
+local = [
+    "numpy>=1.24,<2",
+    "torch==2.2.2",
+    "transformers==4.46.3"
+]
+
+dev = [
+    "build>=1.2",
+    "pytest>=8",
+    "twine>=5"
+]
+
+[tool.setuptools.packages.find]
+include = ["temperans*"]
+
+[tool.setuptools.package-data]
+"temperans.models" = ["*.pkl"]
+
+[project.urls]
+Homepage = "https://temperanai.netlify.app/"
