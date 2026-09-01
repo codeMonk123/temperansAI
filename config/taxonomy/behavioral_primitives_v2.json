@@ -1,0 +1,44 @@
+{
+  "name": "Temperans Behavioral Primitives",
+  "version": "2.0",
+  "unit": "current_event_conditioned_on_prior_trajectory",
+  "classes": {
+    "continue": {
+      "definition": "The actor continues, accepts, elaborates, or naturally advances the existing interaction direction."
+    },
+    "new_topic": {
+      "definition": "The actor introduces a materially different topic or goal without opposing the prior direction."
+    },
+    "clarify": {
+      "definition": "The actor requests or supplies clarification needed to understand the existing interaction."
+    },
+    "repair": {
+      "definition": "The actor indicates that the prior attempt failed, was incorrect, did not work, or did not satisfy the underlying need, and requests or initiates another attempt to fix or replace it."
+    },
+    "correct": {
+      "definition": "The actor supplies information that corrects a factual, technical, interpretive, or contextual error in the prior interaction."
+    },
+    "disagree": {
+      "definition": "The actor explicitly disputes a claim, judgment, interpretation, or position without necessarily refusing the broader direction."
+    },
+    "resist": {
+      "definition": "The actor declines, refuses, rejects, pushes back against, or deliberately circumvents the direction established by the prior interaction."
+    },
+    "refine": {
+      "definition": "The actor requests modification, expansion, simplification, restyling, or improvement of the existing output without necessarily indicating that the prior attempt failed."
+    }
+  },
+  "rules": [
+    "Classify the observable behavioral relationship, not sentiment.",
+    "Use prior trajectory context.",
+    "Do not use future events.",
+    "A failed attempt followed by a request for another solution is repair, not automatically resist.",
+    "A factual or technical correction is correct, not automatically resist.",
+    "A topic switch without opposition is new_topic.",
+    "Explicit refusal, rejection, decline, or deliberate circumvention of a prior boundary is resist.",
+    "Choose the dominant behavioral transition when more than one is plausible.",
+    "A request such as 'make it longer', 'simplify it', or 'use a different tone' is refine unless failure or inadequacy of the prior attempt is expressed.",
+    "A statement such as 'that did not work', 'the error remains', or 'try another solution' is repair when it responds to failure of the prior attempt.",
+    "Refinement changes an otherwise usable output; repair responds to an unsuccessful or inadequate attempt."
+  ]
+}

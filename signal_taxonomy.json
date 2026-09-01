@@ -1,0 +1,31 @@
+{
+  "version": "0.1",
+
+  "signals": {
+
+    "actor": [
+      "resistance",
+      "frustration",
+      "uncertainty",
+      "intent_clarity"
+    ],
+
+    "interaction": [
+      "alignment",
+      "repetition",
+      "pressure",
+      "repair_failure"
+    ],
+
+    "trajectory": [
+      "trust_erosion",
+      "escalation_likelihood"
+    ],
+
+    "cross_surface": [
+      "cross_surface_repetition",
+      "effort_duplication"
+    ]
+
+  }
+}

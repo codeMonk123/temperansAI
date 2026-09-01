@@ -1,0 +1,51 @@
+{
+  "version": "0.1",
+
+  "signals": {
+
+    "resistance": {
+
+      "description": "Degree to which the current actor opposes, rejects, refuses, or pushes back against the other actor's proposed action, request, position, or direction.",
+
+      "scope": "current_turn_given_trajectory",
+
+      "anchors": {
+
+        "0.0": {
+          "meaning": "No resistance",
+          "example": "Yes, that works for me."
+        },
+
+        "0.25": {
+          "meaning": "Mild hesitation or reluctance",
+          "example": "I'm not sure that's what I want."
+        },
+
+        "0.50": {
+          "meaning": "Clear disagreement or refusal",
+          "example": "No thanks. I'd prefer something else."
+        },
+
+        "0.75": {
+          "meaning": "Strong or repeated refusal",
+          "example": "No. I've already said I don't want that."
+        },
+
+        "1.0": {
+          "meaning": "Persistent and unequivocal resistance after repeated counterparty attempts",
+          "example": "Stop asking. I've told you three times that I do not want this."
+        }
+      },
+
+      "context_rules": [
+        "Score the current turn, not the conversation as a whole.",
+        "Use previous trajectory events when they change the meaning of the current turn.",
+        "Repeated refusal should generally score higher than an equivalent first refusal.",
+        "Do not infer resistance solely from negative words such as no or not.",
+        "Distinguish resistance from frustration. An actor can resist calmly.",
+        "Distinguish resistance from uncertainty. Hesitation is weaker than explicit refusal."
+      ]
+    }
+
+  }
+}

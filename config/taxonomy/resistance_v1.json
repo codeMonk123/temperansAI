@@ -1,0 +1,89 @@
+{
+  "signal": "resistance",
+  "version": "1.0",
+  "unit": "current_event_conditioned_on_prior_trajectory",
+  "range": [
+    0.0,
+    1.0
+  ],
+  "definition": "Degree to which the current actor opposes, rejects, refuses, pushes back against, or declines the immediately relevant direction, proposal, request, claim, or course of action established by the preceding trajectory.",
+  "anchors": {
+    "0.0": "No observable resistance.",
+    "0.25": "Weak or indirect reluctance, hesitation, or soft preference against the proposed direction.",
+    "0.5": "Clear disagreement, correction, rejection, or request to pursue a different direction.",
+    "0.75": "Strong or repeated rejection/refusal despite prior attempts to continue the direction.",
+    "1.0": "Explicit, forceful, sustained refusal or opposition where rejection dominates the current interaction."
+  },
+  "rules": [
+    "Score the current event, not the conversation as a whole.",
+    "Use preceding trajectory context when interpreting the current event.",
+    "Do not infer resistance solely from negative sentiment.",
+    "A correction can be resistance even when expressed politely.",
+    "Frustration and resistance may co-occur but are distinct signals.",
+    "Uncertainty alone is not resistance.",
+    "Do not use future events when assigning the score."
+  ],
+  "annotation_contract": {
+    "score": {
+      "type": "float",
+      "range": [
+        0.0,
+        1.0
+      ]
+    },
+    "confidence": {
+      "type": "float",
+      "range": [
+        0.0,
+        1.0
+      ],
+      "meaning": "Annotator certainty that the assigned score is correct under this rubric. 1.0 means highly certain; 0.0 means unable to determine the score. A resistance score of 0.0 can and should have high confidence when there is clearly no resistance."
+    },
+    "evidence_event_indices": {
+      "type": "array[int]",
+      "meaning": "Prior/current event indices that directly support the score."
+    },
+    "rationale": {
+      "type": "string",
+      "meaning": "Short rubric-grounded explanation of the score."
+    }
+  },
+  "exclusions": [
+    {
+      "case": "topic_change",
+      "rule": "A topic change alone is not resistance unless the actor also rejects or opposes the prior direction."
+    },
+    {
+      "case": "clarification",
+      "rule": "A clarification request alone is not resistance."
+    },
+    {
+      "case": "repair_request",
+      "rule": "Requesting a corrected format, missing information, or another attempt is not automatically resistance."
+    },
+    {
+      "case": "correction",
+      "rule": "Correcting a factual or interpretive mistake is resistance only to the extent that the actor rejects or pushes back against the prior claim or direction."
+    },
+    {
+      "case": "negative_sentiment",
+      "rule": "Negative sentiment, frustration, or dissatisfaction without opposition or rejection is not sufficient for resistance."
+    }
+  ],
+  "adjudicated_examples": [
+    {
+      "pattern": "circumvention_after_refusal",
+      "previous": "Assistant explicitly refuses or establishes a boundary.",
+      "current": "Actor reframes, role-plays, or changes framing specifically to continue the refused direction.",
+      "score_guidance": "Usually strong resistance (approximately 0.75-1.0) when the circumvention clearly opposes the established boundary.",
+      "reason": "Resistance can be behavioral and implicit; explicit words such as 'no' are not required."
+    },
+    {
+      "pattern": "technical_context_correction",
+      "previous": "Assistant gives instructions based on an incorrect technical assumption.",
+      "current": "Actor supplies factual environment/context showing that the instructions do not apply.",
+      "score_guidance": "Usually 0.0 resistance unless the actor additionally rejects or opposes the broader direction.",
+      "reason": "Correcting applicability or supplying missing technical context is repair/correction, not resistance by itself."
+    }
+  ]
+}
