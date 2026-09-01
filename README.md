@@ -6,16 +6,40 @@ Trajectory intelligence for human–agent–tool interactions.
 tools, and computes structural signals over them — duplicated tool calls, tool
 thrash, failure and recovery runs, and agent handoffs.
 
+Copyright 2026 Temperans AI. Licensed under the Apache License, Version 2.0.
+
 > **Alpha.** The public API covers event ingestion and trajectory assembly.
 > Behavioral perception (classifying turns as repair, resistance, and similar) is
-> under active research and is **not** part of the public API. See
-> [ENGINEERING.md](ENGINEERING.md) for current defects and roadmap.
+> under active research and is **not** part of the public API.
+
+---
+
+## Contents
+
+- [Install](#install)
+- [Quickstart](#quickstart)
+- [What it computes](#what-it-computes)
+- [Status](#status)
+- [Engineering notes](#engineering-notes)
+  - [1. What is actually shipped](#1-what-is-actually-shipped)
+  - [2. Correctness defects](#2-correctness-defects)
+  - [3. Complexity and latency](#3-complexity-and-latency)
+  - [4. Naming and packaging hazards](#4-naming-and-packaging-hazards)
+  - [5. Experimental artifacts in the distribution](#5-experimental-artifacts-in-the-distribution)
+  - [6. Testing](#6-testing)
+  - [7. Remediation sequence](#7-remediation-sequence)
+  - [8. Invariants](#8-invariants)
+- [License](#license)
+
+---
 
 ## Install
 
 ```bash
 pip install temperans
 ```
+
+Requires Python 3.10 or later.
 
 ## Quickstart
 
@@ -51,23 +75,23 @@ labels, no inference.
 
 ## Status
 
-| call | State |
+| Area | State |
 |---|---|
 | Event model, trajectory assembly, SQLite store | Working, alpha |
 | Structural signals | Working, deterministic |
-| Thread resolution | Alpha; see ENGINEERING.md §2.5 |
+| Thread resolution | Alpha; see §2.5 |
 | Behavioral perception | Research; not exported |
 
-# Engineering Notes — temperans
+---
+
+# Engineering notes
 
 Status: `0.1.0a1` (alpha). Audit date: 2026-09-01.
 
-This document records the engineering state of the package, the defects found in
+This section records the engineering state of the package, the defects found in
 the current implementation, and the sequence in which they should be fixed. It is
-an internal working document, not marketing material. Claims about model quality
-belong in `experiments_wildchat_v1.json`, not here.
-
----
+a working document, not marketing material. Claims about model quality belong in
+`experiments_wildchat_v1.json`, not here.
 
 ## 1. What is actually shipped
 
@@ -104,11 +128,9 @@ that is safe to put in front of a design partner.
 `metadata["behavior"]` payload — i.e. only when a behavior model is explicitly
 attached. Without one they remain zero, which is the correct default.
 
----
-
 ## 2. Correctness defects
 
-These are ordered by likelihood of producing a wrong answer on real traffic.
+Ordered by likelihood of producing a wrong answer on real traffic.
 
 ### 2.1 `duplicate_tool_calls` compares only the immediately preceding tool event
 
@@ -181,21 +203,19 @@ replay.
 `temperans/threading.py` constructs a fresh `TfidfVectorizer` per `resolve()` and
 fits it on `documents + [text]`.
 
-The vocabulary and IDF weights are therefore derived from a corpus that changes
-on every turn. Cosine scores are not comparable across calls, and the same input
-text can resolve to different threads depending on what else happens to be in the
-trajectory at that moment. A fixed `threshold=0.15` against a moving
-representation is not a stable decision boundary.
+The vocabulary and IDF weights are therefore derived from a corpus that changes on
+every turn. Cosine scores are not comparable across calls, and the same input text
+can resolve to different threads depending on what else happens to be in the
+trajectory at that moment. A fixed `threshold=0.15` against a moving representation
+is not a stable decision boundary.
 
 This is a correctness problem, not a performance problem: thread assignment is
 non-deterministic with respect to trajectory history.
 
 **Fix (alpha).** Use `HashingVectorizer`, which has no fitted state, so scores are
-stable across calls. **Fix (later).** Persist a fitted vectorizer per store, or
-move to a fixed sentence-embedding model. Either way, calibrate the threshold
-against labeled thread boundaries rather than picking a constant.
-
----
+stable across calls. **Fix (later).** Persist a fitted vectorizer per store, or move
+to a fixed sentence-embedding model. Either way, calibrate the threshold against
+labeled thread boundaries rather than picking a constant.
 
 ## 3. Complexity and latency
 
@@ -204,11 +224,11 @@ against labeled thread boundaries rather than picking a constant.
 Two compounding issues:
 
 `temperans/trace.py:33-46` — `Trace.__init__` loads every persisted event and
-replays `PerceptionEngine.update()` and `_replay_behavior()` over the full
-history on every construction.
+replays `PerceptionEngine.update()` and `_replay_behavior()` over the full history
+on every construction.
 
-`temperans/perception.py:41` — each `update()` call itself scans `events[:-1]`
-to find prior tool events.
+`temperans/perception.py:41` — each `update()` call itself scans `events[:-1]` to
+find prior tool events.
 
 Opening a trajectory with `n` events therefore costs O(n²) work before the first
 new event is observed. With a behavior model attached, `_replay_behavior` adds a
@@ -218,8 +238,8 @@ This is the reason a sub-100 ms per-turn budget is not currently reachable, and 
 amount of hardware fixes an asymptotic problem.
 
 **Fix — state snapshotting.** Persist `TrajectoryState` alongside events with the
-`event_id` of the last event folded into it. On construction, load the snapshot
-and apply only events after that watermark. Combined with §2.1's bounded deque,
+`event_id` of the last event folded into it. On construction, load the snapshot and
+apply only events after that watermark. Combined with §2.1's bounded deque,
 per-event cost becomes O(1) and trace open becomes O(new events).
 
 Snapshots must carry a `state_schema_version`; on mismatch, discard and recompute
@@ -238,8 +258,6 @@ A single `sqlite3.connect()` with default `check_same_thread=True` is held for t
 store's lifetime. Any threaded or async ingestion path fails. Either adopt a
 connection-per-thread pool or document the store as single-threaded and enforce it.
 
----
-
 ## 4. Naming and packaging hazards
 
 - **`temperans/threading.py` shadows the stdlib `threading` module.** Any absolute
@@ -257,8 +275,6 @@ connection-per-thread pool or document the store as single-threaded and enforce 
   dataclass. Use `dataclasses.asdict` with an explicit set-to-count adapter.
 - **Schema migration is ad-hoc.** `_migrate_schema` performs `PRAGMA table_info`
   checks per column. Introduce a `schema_version` table and ordered migrations.
-
----
 
 ## 5. Experimental artifacts in the distribution
 
@@ -279,16 +295,14 @@ wheel and is one import away for anyone reading the source.
 - Move experimental heads behind an explicit `temperans.experimental` namespace, or
   exclude them from the distribution entirely.
 - Remove `confidence` from `BehaviorResult`, or rename it. It is currently
-  `float(np.max(predict_proba(...)))` — an uncalibrated softmax maximum from a
-  model fit on fewer than 100 examples. Presenting it as "confidence" invites
-  readers to treat it as a probability. If a score is retained, name it
-  `raw_score` and document that it is uncalibrated.
-- `history_conditioned=True` is hardcoded in `models/v1.py` and is returned even
-  when `previous_text` is empty. Derive it from the input.
+  `float(np.max(predict_proba(...)))` — an uncalibrated softmax maximum from a model
+  fit on fewer than 100 examples. Presenting it as "confidence" invites readers to
+  treat it as a probability. If a score is retained, name it `raw_score` and document
+  that it is uncalibrated.
+- `history_conditioned=True` is hardcoded in `models/v1.py` and is returned even when
+  `previous_text` is empty. Derive it from the input.
 - `classes.index(1.0)` raises `ValueError` if the match head has no positive class.
   Guard it.
-
----
 
 ## 6. Testing
 
@@ -298,8 +312,8 @@ Current coverage: `tests/test_trace.py`, 124 lines. CI runs `compileall`, `pytes
 Gaps, in priority order:
 
 1. **Structural signal unit tests.** One test per counter, with a hand-built event
-   sequence and an asserted expected value. These are the signals shown to
-   customers; they need golden fixtures.
+   sequence and an asserted expected value. These are the signals shown to customers;
+   they need golden fixtures.
 2. **Adversarial ordering tests.** Out-of-order timestamps, mixed offsets, duplicate
    `event_id`, missing `tool_name`, empty text.
 3. **Snapshot equivalence property.** For any event sequence, state resumed from a
@@ -310,8 +324,6 @@ Gaps, in priority order:
    including metadata types.
 
 Add `ruff` and `mypy` to CI. Add coverage reporting.
-
----
 
 ## 7. Remediation sequence
 
@@ -332,12 +344,9 @@ Ordered by ratio of risk removed to effort.
 Items 1–6 are the `0.1.0a2` scope. Note that `0.1.0a1` cannot be overwritten on
 PyPI; all fixes ship as a new version.
 
----
+## 8. Invariants
 
-## 8. Invariants to hold going forward
-
-These are the properties that should never regress, stated so that tests can
-enforce them:
+Properties that should never regress, stated so tests can enforce them:
 
 1. The event log is the source of truth. Any derived state must be reconstructible
    from it alone.
@@ -351,6 +360,20 @@ enforce them:
 6. Any emitted score carries its model version and a statement of whether it is
    calibrated.
 
+---
+
 ## License
 
-Apache-2.0
+Copyright 2026 Temperans AI.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at <http://www.apache.org/licenses/LICENSE-2.0>.
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the [LICENSE](LICENSE) file
+for the specific language governing permissions and limitations.
+
+"Temperans" and the Temperans logo are trademarks of Temperans AI. Trademark rights
+are not granted under the Apache License.
