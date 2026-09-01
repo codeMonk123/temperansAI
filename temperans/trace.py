@@ -307,5 +307,17 @@ class Trace:
     def summary(self):
         return self.query().summary()
 
+    def analyze_trajectory(self, thread_id):
+        from .trajectory import TrajectoryAnalyzer
+
+        return TrajectoryAnalyzer(self).analyze(
+            thread_id
+        )
+
+    def analyze_trajectories(self):
+        from .trajectory import TrajectoryAnalyzer
+
+        return TrajectoryAnalyzer(self).analyze_all()
+
     def state(self):
         return self._state.to_dict()
