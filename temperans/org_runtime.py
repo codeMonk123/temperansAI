@@ -3,6 +3,7 @@ from pathlib import Path
 from temperans.event_adapter import GenericChatbotAdapter
 from temperans.identity_registry import IdentityRegistry
 from temperans.pilot_service import PilotService
+from temperans.sqlite_audit_store import SQLitePilotAuditStore
 from temperans.policy import PolicyRegistry
 from temperans.sqlite_store import SQLiteStore, EventConflict
 from temperans.workstate_extractor_v1 import WorkStateExtractor
@@ -24,7 +25,13 @@ class OrganizationRuntime:
         self.policy = self.policies.get(config.policy_id)
 
         self.sqlite = SQLiteStore(self.platform_root / "control" / "control.db")
-        self.service = PilotService(self.root)
+        self.service = PilotService(
+            self.root,
+            audit_store=SQLitePilotAuditStore(
+                self.sqlite,
+                config.organization_id,
+            ),
+        )
 
         self.identities = IdentityRegistry(
             organization_id=config.organization_id,
@@ -96,7 +103,7 @@ class OrganizationRuntime:
             "entities": work.entities,
             "artifacts": work.artifacts,
             "properties": event.properties,
-        })
+        }, event_id=event_id)
 
         result["organization_id"] = self.config.organization_id
         result["person_id"] = person_id
