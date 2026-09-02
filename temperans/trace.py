@@ -17,6 +17,7 @@ class Trace:
         store=None,
         behavior_model=None,
         thread_resolver=None,
+        trajectory_router=None,
     ):
         self.user_id = user_id
         self.trajectory_id = trajectory_id or str(uuid4())
@@ -27,6 +28,7 @@ class Trace:
         self.store = store
         self.behavior_model = behavior_model
         self.thread_resolver = thread_resolver
+        self.trajectory_router = trajectory_router
 
         self.events = []
         self._state = TrajectoryState()
@@ -102,21 +104,36 @@ class Trace:
                 None,
             )
 
-        # No automatic resolver configured.
-        if self.thread_resolver is None:
-            return (
-                None,
-                None,
+        # New trajectory router.
+        #
+        # It operates over canonical events and decides:
+        # ATTACH / SUGGEST / NEW.
+        if self.trajectory_router is not None:
+            result = self.trajectory_router.resolve(
+                text=text,
+                events=self.events,
             )
 
-        result = self.thread_resolver.resolve(
-            text=text,
-            existing_threads=self._existing_threads(),
-        )
+            return (
+                result.thread_id,
+                result,
+            )
+
+        # Legacy automatic thread resolver.
+        if self.thread_resolver is not None:
+            result = self.thread_resolver.resolve(
+                text=text,
+                existing_threads=self._existing_threads(),
+            )
+
+            return (
+                result.thread_id,
+                result,
+            )
 
         return (
-            result.thread_id,
-            result,
+            None,
+            None,
         )
 
     def _apply_behavior_dict(self, behavior):

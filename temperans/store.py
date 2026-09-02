@@ -137,6 +137,7 @@ class TrajectoryStore:
         goal_id=None,
         behavior_model=None,
         thread_resolver=None,
+        trajectory_router=None,
     ):
         from .trace import Trace
 
@@ -149,6 +150,7 @@ class TrajectoryStore:
             store=self,
             behavior_model=behavior_model,
             thread_resolver=thread_resolver,
+            trajectory_router=trajectory_router,
         )
 
     def close(self):
