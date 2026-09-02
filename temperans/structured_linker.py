@@ -171,6 +171,39 @@ class StructuredTrajectoryLinker:
         # 3. Exact anchors
         # ----------------------------------------
 
+        # ----------------------------------------
+        # 6. Explicit durable-goal continuity
+        # ----------------------------------------
+
+        trajectory_goal = (
+            trajectory.durable_goal
+            or ""
+        ).strip().lower()
+
+        conversation_goal = (
+            conversation.goal
+            or ""
+        ).strip().lower()
+
+        if (
+            trajectory_goal
+            and conversation_goal
+            and trajectory_goal == conversation_goal
+            and trajectory.lifecycle
+            in {"active", "waiting", "blocked"}
+        ):
+            evidence.reasons.append(
+                "explicit durable goal matches live trajectory"
+            )
+
+            return StructuredDecision(
+                decision=ATTACH,
+                confidence=0.95,
+                semantic_score=semantic_score,
+                evidence=evidence,
+            )
+
+
         if evidence.shared_artifacts:
             evidence.reasons.append(
                 "shared artifact provides candidate-scope evidence "
@@ -240,7 +273,7 @@ class StructuredTrajectoryLinker:
             )
 
         # ----------------------------------------
-        # 6. Semantic evidence
+        # 7. Semantic evidence
         # ----------------------------------------
 
         if semantic_score >= self.strong_semantic:

@@ -86,13 +86,53 @@ class CascadeTrajectoryLinker:
 
         # Escalate only ambiguous cases.
         try:
-            frontier = self.frontier_judge.judge(
+            frontier_result = self.frontier_judge.judge(
                 trajectory=trajectory,
                 conversation=conversation,
                 structural_evidence=(
                     local.evidence.to_dict()
                 ),
             )
+
+            # FrontierJudgePool returns:
+            #   (decision, provider, attempts)
+            #
+            # A single FrontierTrajectoryJudge returns
+            # the decision directly.
+            if (
+                isinstance(frontier_result, tuple)
+                and len(frontier_result) == 3
+            ):
+                frontier, provider, attempts = frontier_result
+
+                if frontier is None:
+                    return CascadeDecision(
+                        decision=CLARIFY,
+                        confidence=local.confidence,
+                        source="user_clarification",
+                        reasons=[
+                            "local trajectory evidence is ambiguous",
+                            "all frontier semantic judges unavailable",
+                            *[
+                                (
+                                    f"{attempt.provider}: "
+                                    f"{attempt.error}"
+                                )
+                                for attempt in attempts
+                                if not attempt.success
+                            ],
+                        ],
+                        frontier_used=True,
+                        frontier_available=False,
+                    )
+
+                frontier_source = (
+                    f"frontier_judge:{provider}"
+                )
+
+            else:
+                frontier = frontier_result
+                frontier_source = "frontier_judge"
 
         except Exception as exc:
             return CascadeDecision(
@@ -117,7 +157,7 @@ class CascadeTrajectoryLinker:
             return CascadeDecision(
                 decision=frontier.decision,
                 confidence=frontier.confidence,
-                source="frontier_judge",
+                source=frontier_source,
                 reasons=list(frontier.reasons),
                 frontier_used=True,
                 frontier_available=True,
