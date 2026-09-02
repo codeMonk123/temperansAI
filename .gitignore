@@ -59,3 +59,7 @@ ttlb_semantic_scores.json
 ttlb_v1_semantic_scores.json
 ttlb_*_results.jsonl
 ttlb_v2_semantic_scores.json
+ttlb_v2_semantic_abstentions.jsonl
+ttlb_v2_semantic_mock_cache.jsonl
+ttlb_v2_semantic_gemini_cache.jsonl
+ttlb_v2_semantic_safe_raw.jsonl

@@ -19,6 +19,7 @@ class ConversationState:
 
     entities: list[str] = field(default_factory=list)
     artifacts: list[str] = field(default_factory=list)
+    anchors: list = field(default_factory=list)
 
     decisions: list[str] = field(default_factory=list)
     attempts: list[str] = field(default_factory=list)
@@ -65,6 +66,7 @@ class TrajectoryState:
 
     entities: list[str] = field(default_factory=list)
     artifacts: list[str] = field(default_factory=list)
+    anchors: list = field(default_factory=list)
 
     open_questions: list[str] = field(default_factory=list)
     resolved_questions: list[str] = field(default_factory=list)
@@ -104,6 +106,10 @@ class TrajectoryState:
             self.artifacts,
             state.artifacts,
         )
+
+        for anchor in state.anchors:
+            if anchor not in self.anchors:
+                self.anchors.append(anchor)
 
         self._append_unique(
             self.decisions,

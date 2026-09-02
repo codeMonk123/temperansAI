@@ -5,6 +5,8 @@ from temperans.workstate import (
     TrajectoryState,
 )
 
+from temperans.anchor_evidence import AnchorEvidenceEngine
+
 
 ATTACH = "attach"
 BRANCH = "branch"
@@ -58,6 +60,7 @@ class StructuredTrajectoryLinker:
         self.strong_semantic = strong_semantic
         self.plausible_semantic = plausible_semantic
         self.weak_semantic = weak_semantic
+        self.anchor_engine = AnchorEvidenceEngine()
 
     def _normalize(self, values):
         return {
@@ -106,6 +109,50 @@ class StructuredTrajectoryLinker:
         continuation_signal: bool = False,
     ):
         evidence = StructuredEvidence()
+
+        anchor_evidence = self.anchor_engine.compare(
+            trajectory.anchors,
+            conversation.anchors,
+        )
+
+        # Typed identity boundary mismatch dominates.
+        if anchor_evidence.hard_new:
+            evidence.reasons.extend(
+                [
+                    trace.explanation
+                    for trace in anchor_evidence.traces
+                ]
+            )
+
+            return StructuredDecision(
+                decision=NEW,
+                confidence=0.99,
+                semantic_score=semantic_score,
+                evidence=evidence,
+            )
+
+        # Exact strong work identifier can establish
+        # trajectory continuity deterministically.
+        if anchor_evidence.strong_attach:
+            evidence.reasons.extend(
+                [
+                    trace.explanation
+                    for trace in anchor_evidence.traces
+                ]
+            )
+
+            return StructuredDecision(
+                decision=ATTACH,
+                confidence=0.99,
+                semantic_score=semantic_score,
+                evidence=evidence,
+            )
+
+        # Medium/scope anchors remain supporting evidence.
+        for trace in anchor_evidence.traces:
+            evidence.reasons.append(
+                f"{trace.rule}: {trace.explanation}"
+            )
 
         (
             evidence.shared_entities,
