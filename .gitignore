@@ -52,3 +52,9 @@ experiments*.jsonl
 
 # Local experimental artifacts
 /wildchat_schema.txt
+
+# Temperans trajectory research
+.venv-embed/
+ttlb_semantic_scores.json
+ttlb_v1_semantic_scores.json
+ttlb_*_results.jsonl
