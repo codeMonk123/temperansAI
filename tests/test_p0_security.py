@@ -222,10 +222,11 @@ def test_runtime_storage_is_physically_tenant_scoped(
         != runtime_b.idempotency.path
     )
 
-    assert (
-        runtime_a.identities.path
-        != runtime_b.identities.path
-    )
+    # Identity persistence is now shared SQLite. Tenant isolation is enforced
+    # by organization_id in the identity primary key, not separate files.
+    assert runtime_a.identities.store.path == runtime_b.identities.store.path
+    assert runtime_a.identities.organization_id == "xyzabc321"
+    assert runtime_b.identities.organization_id == "xyzabc322"
 
 
 def test_same_event_id_is_legal_in_two_organizations(
