@@ -84,6 +84,8 @@ class SQLiteStore:
           late_event INTEGER NOT NULL DEFAULT 0,
           payload_hash TEXT NOT NULL,
           payload_json TEXT NOT NULL,
+          result_json TEXT,
+          completed_at TEXT,
           UNIQUE(organization_id,event_id),
           FOREIGN KEY(organization_id) REFERENCES organizations(organization_id) ON DELETE CASCADE
         );
@@ -197,11 +199,16 @@ class SQLiteStore:
         try:
             with self.conn:
                 self.conn.execute("""
-                  INSERT INTO events VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                  INSERT INTO events (
+                    record_id, organization_id, event_id, workspace_id, person_id,
+                    external_user_id, conversation_id, surface, event_type,
+                    occurred_at, received_at, source_sequence, late_event,
+                    payload_hash, payload_json, result_json, completed_at
+                  ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 """, (rid, organization_id, event_id, workspace_id, person_id,
                       external_user_id, conversation_id, surface, event_type,
                       occurred_at, now, source_sequence, int(late_event),
-                      digest, canonical_json(payload)))
+                      digest, canonical_json(payload), None, None))
         except sqlite3.IntegrityError:
             old = self.get_event(organization_id=organization_id, event_id=event_id)
             if old and old["payload_hash"] == digest:
@@ -220,7 +227,27 @@ class SQLiteStore:
         x = dict(row)
         x["late_event"] = bool(x["late_event"])
         x["payload"] = json.loads(x.pop("payload_json"))
+        raw_result = x.pop("result_json", None)
+        x["result"] = json.loads(raw_result) if raw_result else None
         return x
+
+    def complete_event(self, *, organization_id, event_id, result):
+        now = utc_now()
+        with self.conn:
+            cur = self.conn.execute(
+                """
+                UPDATE events
+                SET result_json=?, completed_at=?
+                WHERE organization_id=? AND event_id=? AND result_json IS NULL
+                """,
+                (canonical_json(result), now, organization_id, event_id),
+            )
+        row = self.get_event(organization_id=organization_id, event_id=event_id)
+        if row is None:
+            raise KeyError("event not found")
+        if cur.rowcount == 0 and row["result"] != result:
+            raise RuntimeError("event already completed with a different result")
+        return row["result"]
 
     def count_events(self, organization_id):
         return self.conn.execute("SELECT COUNT(*) FROM events WHERE organization_id=?",

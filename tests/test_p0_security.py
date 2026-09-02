@@ -31,6 +31,7 @@ from temperans.idempotency import (
     IdempotencyStore,
 )
 from temperans.platform import TemperansPlatform
+from temperans.sqlite_store import EventConflict
 
 
 def _create_org(
@@ -217,10 +218,7 @@ def test_runtime_storage_is_physically_tenant_scoped(
 
     assert runtime_a.root != runtime_b.root
 
-    assert (
-        runtime_a.idempotency.path
-        != runtime_b.idempotency.path
-    )
+    assert runtime_a.sqlite.path == runtime_b.sqlite.path
 
     # Identity persistence is now shared SQLite. Tenant isolation is enforced
     # by organization_id in the identity primary key, not separate files.
@@ -297,41 +295,12 @@ def test_same_event_id_is_legal_in_two_organizations(
 
     runtime_a = platform.runtime(org_a)
     runtime_b = platform.runtime(org_b)
-
-    cached_a = (
-        runtime_a.idempotency.lookup(
-            "evt_shared_001",
-            payload_a,
-        )
-    )
-
-    cached_b = (
-        runtime_b.idempotency.lookup(
-            "evt_shared_001",
-            payload_b,
-        )
-    )
-
-    assert cached_a == result_a
-    assert cached_b == result_b
-
-    # A's payload must not exist in B's idempotency domain.
-    with pytest.raises(
-        IdempotencyConflict
-    ):
-        runtime_b.idempotency.lookup(
-            "evt_shared_001",
-            payload_a,
-        )
-
-    # B's payload must not exist in A's idempotency domain.
-    with pytest.raises(
-        IdempotencyConflict
-    ):
-        runtime_a.idempotency.lookup(
-            "evt_shared_001",
-            payload_b,
-        )
+    stored_a = runtime_a.sqlite.get_event(organization_id=org_a, event_id="evt_shared_001")
+    stored_b = runtime_b.sqlite.get_event(organization_id=org_b, event_id="evt_shared_001")
+    assert stored_a["result"] == result_a
+    assert stored_b["result"] == result_b
+    assert stored_a["payload"] == payload_a
+    assert stored_b["payload"] == payload_b
 
 
 def test_duplicate_observe_does_not_mutate_twice(
@@ -456,7 +425,7 @@ def test_duplicate_event_different_payload_conflicts_at_runtime(
     )
 
     with pytest.raises(
-        IdempotencyConflict
+        EventConflict
     ):
         platform.observe_with_key(
             api_key=api_key,
