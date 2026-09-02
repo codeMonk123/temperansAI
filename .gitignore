@@ -63,3 +63,4 @@ ttlb_v2_semantic_abstentions.jsonl
 ttlb_v2_semantic_mock_cache.jsonl
 ttlb_v2_semantic_gemini_cache.jsonl
 ttlb_v2_semantic_safe_raw.jsonl
+.temperans/
