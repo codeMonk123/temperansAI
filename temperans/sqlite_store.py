@@ -136,6 +136,20 @@ class SQLiteStore:
                               (hash_api_key(key), organization_id, now))
         return {"organization_id": organization_id, "api_key": key}
 
+    def get_organization(self, organization_id):
+        row = self.conn.execute(
+            "SELECT * FROM organizations WHERE organization_id=?",
+            (organization_id,),
+        ).fetchone()
+        if not row:
+            return None
+        return {
+            "organization_id": row["organization_id"],
+            "name": row["name"],
+            "config": json.loads(row["config_json"]),
+            "created_at": row["created_at"],
+        }
+
     def authenticate(self, api_key):
         if not api_key:
             return None
