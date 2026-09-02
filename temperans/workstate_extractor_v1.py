@@ -42,20 +42,6 @@ class WorkStateExtractor:
         )
 
         if not goal:
-            # Prefer the existing candidate's durable goal when
-            # context is unambiguous.
-            if (
-                trajectory_context
-                and len(
-                    trajectory_context
-                ) == 1
-            ):
-                goal = (
-                    trajectory_context[0]
-                    .get("goal", "")
-                )
-
-        if not goal:
             # Conservative raw fallback. This is intentionally
             # visible/auditable rather than pretending to infer a
             # durable objective perfectly.

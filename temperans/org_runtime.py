@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from temperans.idempotency import IdempotencyStore
 from temperans.event_adapter import (
     GenericChatbotAdapter,
 )
@@ -70,14 +71,14 @@ class OrganizationRuntime:
             self.root
         )
 
-        self.identities = (
-            IdentityRegistry(
-                self.root
-                / "identities.json"
-            )
-        )
+        self.identities = IdentityRegistry(self.root / "identities.json", organization_id=config.organization_id)
+        self.idempotency = IdempotencyStore(self.root / "idempotency.json")
 
     def observe(self, payload):
+        event_id = payload.get("event_id")
+        if not event_id: raise ValueError("event_id is required")
+        cached = self.idempotency.lookup(event_id, payload)
+        if cached is not None: return cached
         event = self.adapter.normalize(
             organization_id=
                 self.config.organization_id,
@@ -147,11 +148,9 @@ class OrganizationRuntime:
             "organization_id"
         ] = self.config.organization_id
 
-        result[
-            "person_id"
-        ] = person_id
-
-        return result
+        result["person_id"] = person_id
+        result["event_id"] = event_id
+        return self.idempotency.commit(event_id, payload, result)
 
     def link_identity(
         self,

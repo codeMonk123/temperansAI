@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict
 import uuid
 
 from temperans.anchors import AnchorExtractor
+from temperans.anchor_retrieval import AnchorCandidateRecall
 from temperans.candidate_gate import CandidateDecisionGate
 from temperans.candidate_set import CandidateSetResolver
 from temperans.context_pack import ContextPackBuilder
@@ -40,6 +41,7 @@ class TemperansRuntimeV2:
         self.candidate_floor = candidate_floor
         self.trajectories = {}
         self.extractor = AnchorExtractor()
+        self.anchor_recall = AnchorCandidateRecall()
         self.language = LinkageEvidenceExtractor()
         self.linker = StructuredTrajectoryLinker()
         self.set_resolver = CandidateSetResolver()
@@ -129,7 +131,8 @@ class TemperansRuntimeV2:
         top = ranked[0][0]
         second = ranked[1][0] if len(ranked) > 1 else None
 
-        if top < self.candidate_floor:
+        structural_recall = any(self.anchor_recall.relevant(t, c) for _, t in ranked)
+        if top < self.candidate_floor and not structural_recall:
             t = self._new(c)
             return self._result(
                 "new", t, .90, "candidate_retrieval",
