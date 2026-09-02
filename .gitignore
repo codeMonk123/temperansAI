@@ -58,3 +58,4 @@ experiments*.jsonl
 ttlb_semantic_scores.json
 ttlb_v1_semantic_scores.json
 ttlb_*_results.jsonl
+ttlb_v2_semantic_scores.json
