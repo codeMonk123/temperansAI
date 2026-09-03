@@ -7,6 +7,7 @@ from temperans.sqlite_audit_store import SQLitePilotAuditStore
 from temperans.policy import PolicyRegistry
 from temperans.sqlite_store import SQLiteStore, EventConflict
 from temperans.workstate_extractor_v1 import WorkStateExtractor
+from temperans.late_events import classify_late_event
 
 
 # Compatibility name used by partner_api.
@@ -39,7 +40,7 @@ class OrganizationRuntime:
         )
 
     def observe(self, payload):
-        event_id = payload.get("event_id")
+        event_id = payload.event_id if hasattr(payload, "event_id") else payload.get("event_id")
         if not event_id:
             raise ValueError("event_id is required")
 
@@ -60,19 +61,26 @@ class OrganizationRuntime:
             True,
         )
 
+        late = classify_late_event(
+            self.sqlite, self.config.organization_id, event
+        )
         stored = self.sqlite.insert_event(
             organization_id=self.config.organization_id,
             event_id=event_id,
-            payload=payload,
+            payload=(
+                payload.storage_payload()
+                if hasattr(payload, "storage_payload")
+                else payload
+            ),
             workspace_id=event.workspace_id,
             person_id=person_id,
             external_user_id=event.external_user_id,
             conversation_id=event.conversation_id,
             surface=event.surface,
-            event_type=payload.get("type", "human_message"),
-            occurred_at=payload.get("occurred_at"),
-            source_sequence=payload.get("source_sequence"),
-            late_event=bool(payload.get("late_event", False)),
+            event_type=event.type,
+            occurred_at=event.occurred_at,
+            source_sequence=event.source_sequence,
+            late_event=late["late_event"],
         )
 
         # Completed duplicate: return the original result before any mutation.
@@ -102,12 +110,13 @@ class OrganizationRuntime:
             "entities": work.entities,
             "artifacts": work.artifacts,
             "anchors": work.anchors,
-            "properties": event.properties,
+            "properties": event.metadata,
         }, event_id=event_id)
 
         result["organization_id"] = self.config.organization_id
         result["person_id"] = person_id
         result["event_id"] = event_id
+        result.update(late)
 
         self.sqlite.complete_event(
             organization_id=self.config.organization_id,

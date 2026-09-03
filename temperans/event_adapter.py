@@ -1,84 +1,37 @@
-from dataclasses import dataclass, field
-
-
-@dataclass
-class CanonicalPilotEvent:
-    organization_id: str
-    workspace_id: str
-    surface: str
-    external_user_id: str
-    conversation_id: str
-    text: str
-    goal: str = ""
-    entities: list = field(default_factory=list)
-    artifacts: list = field(default_factory=list)
-    properties: dict = field(default_factory=dict)
-
+from temperans.canonical_event import CanonicalEvent
 
 class EventAdapter:
-    """
-    Adapter contract for arbitrary organization payloads.
-    """
-
-    def normalize(
-        self,
-        *,
-        organization_id,
-        payload,
-    ):
+    def normalize(self,*,organization_id,payload):
         raise NotImplementedError
 
-
 class GenericChatbotAdapter(EventAdapter):
-    def normalize(
-        self,
-        *,
-        organization_id,
-        payload,
-    ):
-        return CanonicalPilotEvent(
-            organization_id=
-                organization_id,
-            workspace_id=
-                payload.get(
-                    "workspace_id",
-                    "default",
-                ),
-            surface=
-                payload.get(
-                    "surface",
-                    "generic_chatbot",
-                ),
-            external_user_id=
-                payload[
-                    "external_user_id"
-                ],
-            conversation_id=
-                payload[
-                    "conversation_id"
-                ],
-            text=
-                payload[
-                    "message"
-                ],
-            goal=
-                payload.get(
-                    "goal",
-                    "",
-                ),
-            entities=
-                payload.get(
-                    "entities",
-                    [],
-                ),
-            artifacts=
-                payload.get(
-                    "artifacts",
-                    [],
-                ),
-            properties=
-                payload.get(
-                    "properties",
-                    {},
-                ),
+    """Accepts both legacy message payloads and CanonicalEvent-shaped payloads."""
+    def normalize(self,*,organization_id,payload):
+        if isinstance(payload,CanonicalEvent):
+            if payload.organization_id!=organization_id:
+                raise ValueError("organization mismatch")
+            return payload
+        content=payload.get("content")
+        if content is None:
+            content={"text":payload.get("message","")}
+        if not isinstance(content,dict):
+            raise ValueError("content must be an object")
+        return CanonicalEvent(
+            organization_id=organization_id,
+            event_id=payload["event_id"],
+            workspace_id=payload.get("workspace_id","default"),
+            surface=payload.get("surface","generic_chatbot"),
+            external_user_id=payload["external_user_id"],
+            conversation_id=payload["conversation_id"],
+            type=payload.get("type","human_message"),
+            occurred_at=payload.get("occurred_at"),
+            received_at=payload.get("received_at"),
+            source_sequence=payload.get("source_sequence"),
+            content=content,
+            goal=payload.get("goal",""),
+            entities=list(payload.get("entities",[])),
+            artifacts=list(payload.get("artifacts",[])),
+            metadata=dict(payload.get("metadata",payload.get("properties",{}))),
         )
+
+CanonicalPilotEvent=CanonicalEvent
