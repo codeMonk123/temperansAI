@@ -89,7 +89,6 @@ class OrganizationRuntime:
             supplied_goal=event.goal,
             entities=event.entities,
             artifacts=event.artifacts,
-            trajectory_context=candidates,
         )
 
         result = self.service.observe({
@@ -102,6 +101,7 @@ class OrganizationRuntime:
             "current_problem": work.current_problem,
             "entities": work.entities,
             "artifacts": work.artifacts,
+            "anchors": work.anchors,
             "properties": event.properties,
         }, event_id=event_id)
 

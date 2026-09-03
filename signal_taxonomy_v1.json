@@ -1,0 +1,97 @@
+{
+  "taxonomy_version": "1.0.0",
+  "namespace": "temperans",
+  "signals": [
+    {
+      "name": "trajectory_created",
+      "maturity": "L1",
+      "definition": "A new persisted trajectory was created."
+    },
+    {
+      "name": "state_changed",
+      "maturity": "L1",
+      "definition": "Persisted structural trajectory state changed."
+    },
+    {
+      "name": "durable_goal_changed",
+      "maturity": "L1",
+      "definition": "The persisted durable_goal field changed."
+    },
+    {
+      "name": "structurally_inert",
+      "maturity": "L1",
+      "definition": "No persisted structural trajectory field changed."
+    },
+    {
+      "name": "failure_count",
+      "maturity": "L1",
+      "definition": "Count of persisted failures."
+    },
+    {
+      "name": "attempt_count",
+      "maturity": "L1",
+      "definition": "Count of persisted attempts."
+    },
+    {
+      "name": "unresolved_question_count",
+      "maturity": "L1",
+      "definition": "Count of persisted open questions."
+    },
+    {
+      "name": "surface_count",
+      "maturity": "L1",
+      "definition": "Count of distinct persisted surfaces."
+    },
+    {
+      "name": "cross_surface_continuation",
+      "maturity": "L1",
+      "definition": "Existing work gained a new surface."
+    },
+    {
+      "name": "resistance",
+      "maturity": "L2",
+      "definition": "Model perception of resistance."
+    },
+    {
+      "name": "frustration",
+      "maturity": "L2",
+      "definition": "Model perception of frustration."
+    },
+    {
+      "name": "goal_shift",
+      "maturity": "L2",
+      "definition": "Model perception that the underlying objective changed."
+    },
+    {
+      "name": "progress",
+      "maturity": "L2",
+      "definition": "Model perception of progress."
+    },
+    {
+      "name": "regression",
+      "maturity": "L2",
+      "definition": "Model perception of regression."
+    },
+    {
+      "name": "repair",
+      "maturity": "L2",
+      "definition": "Model perception of repair."
+    },
+    {
+      "name": "refinement",
+      "maturity": "L2",
+      "definition": "Model perception of refinement."
+    },
+    {
+      "name": "disagreement",
+      "maturity": "L2",
+      "definition": "Model perception of disagreement."
+    },
+    {
+      "name": "context_loss",
+      "maturity": "L2",
+      "definition": "Model perception of context loss."
+    }
+  ],
+  "taxonomy_sha256": "512e3fcddd084818ff94023c7e9cd87dd860570e2efa7fb5208f0c5f55b306ce"
+}

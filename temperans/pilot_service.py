@@ -54,6 +54,7 @@ class PilotService:
             current_problem=r.text,
             entities=data.get("entities", []),
             artifacts=data.get("artifacts", []),
+            anchors=data.get("anchors", []),
             decisions=data.get("decisions", []),
             outcomes=data.get("outcomes", []),
             unresolved=data.get("unresolved", []),
