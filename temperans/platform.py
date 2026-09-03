@@ -69,19 +69,37 @@ class TemperansPlatform:
         self,
         organization_id,
     ):
-        if (
-            organization_id
-            in self._runtimes
+        """
+        Return the runtime for an organization.
+
+        Accepts either:
+            platform.runtime("xyzabc321")
+
+        or:
+            platform.runtime(
+                platform.authenticate(api_key)
+            )
+        """
+        if isinstance(
+            organization_id,
+            OrganizationConfig,
         ):
+            config = organization_id
+            organization_id = (
+                config.organization_id
+            )
+        else:
+            config = None
+
+        if organization_id in self._runtimes:
             return self._runtimes[
                 organization_id
             ]
 
-        config = (
-            self.organizations.get(
+        if config is None:
+            config = self.organizations.get(
                 organization_id
             )
-        )
 
         if config is None:
             raise KeyError(

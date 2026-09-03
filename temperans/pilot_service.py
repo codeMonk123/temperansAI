@@ -3,8 +3,12 @@ from pathlib import Path
 from temperans.pilot_store import PilotStore
 from temperans.redaction import Redactor
 from temperans.runtime_v2 import TemperansRuntimeV2
-from temperans.pilot_snapshot import TrajectorySnapshotStore
 from temperans.workstate import ConversationState
+from temperans.trajectory_persistence import (
+    deserialize_trajectory,
+    snapshot,
+    structural_delta,
+)
 
 
 class PilotService:
@@ -19,10 +23,13 @@ class PilotService:
             semantic_scorer=self.score,
             candidate_floor=.12,
         )
-        self.snapshots = TrajectorySnapshotStore(
-            self.root / "trajectories.json"
-        )
-        self.runtime.trajectories.update(self.snapshots.load())
+        if self.audit_store is not None:
+            rows = self.audit_store.sqlite.list_trajectories(
+                organization_id=self.audit_store.organization_id
+            )
+            for row in rows:
+                trajectory = deserialize_trajectory(row["state"])
+                self.runtime.trajectories[trajectory.trajectory_id] = trajectory
 
     @staticmethod
     def score(t, c):
@@ -61,15 +68,45 @@ class PilotService:
             "redaction_categories": r.categories,
         })
 
+        before = snapshot(self.runtime.trajectories)
         result = self.runtime.process(state)
-        self.snapshots.save(self.runtime.trajectories)
+        after = snapshot(self.runtime.trajectories)
+
+        state_delta = structural_delta(
+            before,
+            after,
+            result.trajectory_id,
+        )
+
+        if self.audit_store is not None and result.decision != "clarify":
+            current = after[result.trajectory_id]
+            existing = self.audit_store.sqlite.get_trajectory(
+                organization_id=self.audit_store.organization_id,
+                trajectory_id=result.trajectory_id,
+            )
+
+            if existing is None:
+                self.audit_store.sqlite.create_trajectory(
+                    organization_id=self.audit_store.organization_id,
+                    trajectory_id=result.trajectory_id,
+                    workspace_id=current["workspace_id"],
+                    person_id=current["person_id"],
+                    state=current,
+                )
+            else:
+                self.audit_store.sqlite.update_trajectory(
+                    organization_id=self.audit_store.organization_id,
+                    trajectory_id=result.trajectory_id,
+                    expected_version=existing["trajectory_version"],
+                    state=current,
+                )
 
         decision_row = {
             "event_id": event_id,
             "event_record_id": ev["record_id"],
             **result.to_dict(),
             # Real contemporaneous delta is added in trajectory migration.
-            "state_delta": {},
+            "state_delta": state_delta,
         }
 
         if self.audit_store is not None:

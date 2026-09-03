@@ -32,7 +32,9 @@ def test_runtime_decision_is_persisted_in_sqlite(tmp_path):
     assert row["decision_id"] == result["decision_record_id"]
     assert row["decision"] == result["decision"]
     assert json.loads(row["trace_json"]) == result["trace"]
-    assert json.loads(row["state_delta_json"]) == {}
+    delta = json.loads(row["state_delta_json"])
+    assert delta["trajectory_created"] is True
+    assert "current_state" in delta["fields"]
     assert not (r.root / "decisions.jsonl").exists()
 
 

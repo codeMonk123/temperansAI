@@ -286,6 +286,25 @@ class SQLiteStore:
                 raise ConcurrentTrajectoryUpdate("stale trajectory version")
         return self.get_trajectory(organization_id=organization_id, trajectory_id=trajectory_id)
 
+    def list_trajectories(self, *, organization_id, workspace_id=None, person_id=None):
+        sql = "SELECT trajectory_id FROM trajectories WHERE organization_id=?"
+        params = [organization_id]
+        if workspace_id is not None:
+            sql += " AND workspace_id=?"
+            params.append(workspace_id)
+        if person_id is not None:
+            sql += " AND person_id=?"
+            params.append(person_id)
+        sql += " ORDER BY created_at, trajectory_id"
+        rows = self.conn.execute(sql, params).fetchall()
+        return [
+            self.get_trajectory(
+                organization_id=organization_id,
+                trajectory_id=row["trajectory_id"],
+            )
+            for row in rows
+        ]
+
     def insert_decision(self, *, organization_id, event_id, trajectory_id, decision,
                         trace, state_delta=None, decision_id=None):
         did = decision_id or "dec_" + uuid.uuid4().hex[:16]
