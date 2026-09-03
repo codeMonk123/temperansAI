@@ -41,6 +41,7 @@ class TemperansPlatform:
         name,
         allowed_surfaces=None,
         retention_days=30,
+        routing_mode="automatic",
     ):
         config = OrganizationConfig(
             organization_id=
@@ -50,6 +51,8 @@ class TemperansPlatform:
                 retention_days,
             allowed_surfaces=
                 allowed_surfaces or [],
+            routing_mode=
+                routing_mode,
         )
 
         return self.organizations.create(

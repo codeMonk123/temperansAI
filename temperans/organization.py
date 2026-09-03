@@ -13,6 +13,7 @@ class OrganizationConfig:
     redact_pii: bool = True
     clarification_enabled: bool = True
     semantic_provider: str = "default"
+    routing_mode: str = "automatic"
     allowed_surfaces: list[str] = field(default_factory=list)
 
     def to_dict(self):

@@ -1,4 +1,5 @@
 from pathlib import Path
+import copy
 
 from temperans.pilot_store import PilotStore
 from temperans.redaction import Redactor
@@ -36,6 +37,22 @@ class PilotService:
         a = set((t.durable_goal + " " + t.current_state).lower().split())
         b = set((c.goal + " " + c.current_problem).lower().split())
         return len(a & b) / len(a | b) if a and b else 0.0
+
+    def propose(self, data):
+        """Evaluate routing on an isolated runtime copy; authoritative state is untouched."""
+        r=self.redactor.redact(data["current_problem"])
+        person_id=data.get("person_id")
+        if not person_id:
+            raise ValueError("person_id is required")
+        state=ConversationState(
+            workspace_id=data["workspace_id"], person_id=person_id,
+            conversation_id=data["conversation_id"], surface=data["surface"],
+            goal=data.get("goal",""), current_problem=r.text,
+            entities=data.get("entities",[]), artifacts=data.get("artifacts",[]),
+            anchors=data.get("anchors",[]), decisions=data.get("decisions",[]),
+            outcomes=data.get("outcomes",[]), unresolved=data.get("unresolved",[]))
+        preview=copy.deepcopy(self.runtime)
+        return preview.process(state).to_dict()
 
     def observe(self, data, event_id=None):
         r = self.redactor.redact(data["current_problem"])

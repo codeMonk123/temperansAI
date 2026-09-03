@@ -126,6 +126,22 @@ class SQLiteStore:
           FOREIGN KEY(organization_id) REFERENCES organizations(organization_id) ON DELETE CASCADE
         );
         """)
+        self.conn.execute("""
+          CREATE TABLE IF NOT EXISTS pending_proposals(
+            proposal_id TEXT PRIMARY KEY,
+            organization_id TEXT NOT NULL,
+            event_id TEXT NOT NULL,
+            status TEXT NOT NULL,
+            proposed_decision TEXT NOT NULL,
+            proposed_trajectory_id TEXT,
+            service_payload_json TEXT NOT NULL,
+            proposal_json TEXT NOT NULL,
+            base_trajectory_version INTEGER,
+            created_at TEXT NOT NULL,
+            resolved_at TEXT,
+            UNIQUE(organization_id,event_id)
+          )
+        """)
         self.conn.commit()
 
     def create_organization(self, *, organization_id, name, config):
@@ -248,6 +264,52 @@ class SQLiteStore:
         if cur.rowcount == 0 and row["result"] != result:
             raise RuntimeError("event already completed with a different result")
         return row["result"]
+
+    def create_pending_proposal(self, *, organization_id, event_id, proposed_decision,
+                                proposed_trajectory_id, service_payload, proposal,
+                                base_trajectory_version=None):
+        old=self.get_pending_proposal(organization_id=organization_id,event_id=event_id)
+        if old:
+            return old
+        proposal_id="prop_"+uuid.uuid4().hex[:16]
+        now=utc_now()
+        with self.conn:
+            self.conn.execute(
+                "INSERT INTO pending_proposals VALUES(?,?,?,?,?,?,?,?,?,?,NULL)",
+                (proposal_id,organization_id,event_id,"pending",proposed_decision,
+                 proposed_trajectory_id,canonical_json(service_payload),
+                 canonical_json(proposal),base_trajectory_version,now))
+        return self.get_pending_proposal(organization_id=organization_id,proposal_id=proposal_id)
+
+    def get_pending_proposal(self, *, organization_id, proposal_id=None, event_id=None):
+        if proposal_id is not None:
+            row=self.conn.execute(
+                "SELECT * FROM pending_proposals WHERE organization_id=? AND proposal_id=?",
+                (organization_id,proposal_id)).fetchone()
+        elif event_id is not None:
+            row=self.conn.execute(
+                "SELECT * FROM pending_proposals WHERE organization_id=? AND event_id=?",
+                (organization_id,event_id)).fetchone()
+        else:
+            raise ValueError("proposal_id or event_id required")
+        if not row:
+            return None
+        x=dict(row)
+        x["service_payload"]=json.loads(x.pop("service_payload_json"))
+        x["proposal"]=json.loads(x.pop("proposal_json"))
+        return x
+
+    def resolve_pending_proposal(self, *, organization_id, proposal_id, status):
+        if status not in {"confirmed","rejected","stale"}:
+            raise ValueError("invalid proposal status")
+        with self.conn:
+            self.conn.execute(
+                "UPDATE pending_proposals SET status=?,resolved_at=? WHERE organization_id=? AND proposal_id=? AND status='pending'",
+                (status,utc_now(),organization_id,proposal_id))
+        row=self.get_pending_proposal(organization_id=organization_id,proposal_id=proposal_id)
+        if row is None:
+            raise KeyError("proposal not found")
+        return row
 
     def count_events(self, organization_id):
         return self.conn.execute("SELECT COUNT(*) FROM events WHERE organization_id=?",

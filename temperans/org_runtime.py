@@ -119,18 +119,38 @@ class OrganizationRuntime:
             "anchors": work.anchors,
             "properties": event.metadata,
         }
-        result = observe_with_concurrency_recovery(
-            self.service,
-            service_payload,
-            event_id,
-            max_retries=1,
-        )
+        mode = getattr(self.config, "routing_mode", "automatic")
+        if mode == "clarify_only":
+            proposal = self.service.propose(service_payload)
+            proposed_tid = proposal.get("trajectory_id")
+            base_version = None
+            if proposed_tid:
+                base = self.sqlite.get_trajectory(
+                    organization_id=self.config.organization_id,
+                    trajectory_id=proposed_tid)
+                if base is not None:
+                    base_version = base["trajectory_version"]
+            pending = self.sqlite.create_pending_proposal(
+                organization_id=self.config.organization_id,
+                event_id=event_id,
+                proposed_decision=proposal.get("decision"),
+                proposed_trajectory_id=proposed_tid,
+                service_payload=service_payload,
+                proposal=proposal,
+                base_trajectory_version=base_version)
+            result=dict(proposal)
+            result.update({"proposed_decision":proposal.get("decision"),
+                           "decision":"clarify","requires_confirmation":True,
+                           "routing_mode":mode,"proposal_id":pending["proposal_id"]})
+        else:
+            result = observe_with_concurrency_recovery(
+                self.service, service_payload, event_id, max_retries=1)
 
         result["organization_id"] = self.config.organization_id
         result["person_id"] = person_id
         result["event_id"] = event_id
-        mode = getattr(self.config, "routing_mode", "automatic")
-        result = apply_routing_mode(mode, result)
+        if mode != "clarify_only":
+            result = apply_routing_mode(mode, result)
         result.update(late)
 
         trajectory_row = (
@@ -141,10 +161,12 @@ class OrganizationRuntime:
             if result.get("trajectory_id") else None
         )
         trajectory_state = trajectory_row["state"] if trajectory_row else {}
-        delta_row = self.sqlite.conn.execute(
-            "SELECT state_delta_json FROM decisions WHERE organization_id=? AND event_id=? ORDER BY created_at DESC LIMIT 1",
-            (self.config.organization_id, event_id),
-        ).fetchone()
+        delta_row = (
+            None if mode == "clarify_only" else
+            self.sqlite.conn.execute(
+                "SELECT state_delta_json FROM decisions WHERE organization_id=? AND event_id=? ORDER BY created_at DESC LIMIT 1",
+                (self.config.organization_id, event_id)).fetchone()
+        )
         import json
         state_delta = json.loads(delta_row["state_delta_json"]) if delta_row else {}
         signals, signal_ids = self.signal_support.record(
