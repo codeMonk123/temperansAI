@@ -111,10 +111,23 @@ class TemperansRuntimeV2:
 
     def process(self, c):
         self._anchors(c)
-        candidates = [
+        person_candidates = [
             t for t in self.trajectories.values()
             if t.workspace_id == c.workspace_id and t.person_id == c.person_id
         ]
+        rescue_candidates = [
+            t for t in self.trajectories.values()
+            if t.workspace_id == c.workspace_id
+            and t.person_id != c.person_id
+            and self.anchor_recall.relevant(t, c)
+        ]
+        seen = set()
+        candidates = []
+        for t in person_candidates + rescue_candidates:
+            if t.trajectory_id not in seen:
+                candidates.append(t)
+                seen.add(t.trajectory_id)
+        cross_person_ids = {t.trajectory_id for t in rescue_candidates}
 
         if not candidates:
             t = self._new(c)
@@ -203,6 +216,18 @@ class TemperansRuntimeV2:
                 "clarify", ranked[0][1], .40, "user_clarification",
                 [DecisionRule(rule="missing_candidate", effect="clarify",
                               explanation="chosen candidate missing")],
+                top, second
+            )
+
+        if action in {"attach", "branch"} and t.trajectory_id in cross_person_ids:
+            return self._result(
+                "clarify", t, confidence, "cross_person_structural_rescue",
+                rules + [DecisionRule(
+                    rule="cross_person_anchor_rescue",
+                    effect="clarify",
+                    evidence={"candidate_id": t.trajectory_id},
+                    explanation="strong work anchor widened retrieval across person identity; identity remains unlinked"
+                )],
                 top, second
             )
 
