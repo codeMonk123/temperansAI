@@ -8,6 +8,9 @@ from temperans.policy import PolicyRegistry
 from temperans.sqlite_store import SQLiteStore, EventConflict
 from temperans.workstate_extractor_v1 import WorkStateExtractor
 from temperans.late_events import classify_late_event
+from temperans.runtime_support import RuntimeSignalSupport, instrumentation
+from temperans.concurrency_recovery import observe_with_concurrency_recovery
+from temperans.routing_control import apply_routing_mode
 
 
 # Compatibility name used by partner_api.
@@ -37,6 +40,10 @@ class OrganizationRuntime:
         self.identities = IdentityRegistry(
             organization_id=config.organization_id,
             store=self.sqlite,
+        )
+
+        self.signal_support = RuntimeSignalSupport(
+            self.sqlite, config.organization_id
         )
 
     def observe(self, payload):
@@ -99,7 +106,7 @@ class OrganizationRuntime:
             artifacts=event.artifacts,
         )
 
-        result = self.service.observe({
+        service_payload = {
             "workspace_id": event.workspace_id,
             "person_id": person_id,
             "external_user_id": event.external_user_id,
@@ -111,12 +118,44 @@ class OrganizationRuntime:
             "artifacts": work.artifacts,
             "anchors": work.anchors,
             "properties": event.metadata,
-        }, event_id=event_id)
+        }
+        result = observe_with_concurrency_recovery(
+            self.service,
+            service_payload,
+            event_id,
+            max_retries=1,
+        )
 
         result["organization_id"] = self.config.organization_id
         result["person_id"] = person_id
         result["event_id"] = event_id
+        mode = getattr(self.config, "routing_mode", "automatic")
+        result = apply_routing_mode(mode, result)
         result.update(late)
+
+        trajectory_row = (
+            self.sqlite.get_trajectory(
+                organization_id=self.config.organization_id,
+                trajectory_id=result.get("trajectory_id"),
+            )
+            if result.get("trajectory_id") else None
+        )
+        trajectory_state = trajectory_row["state"] if trajectory_row else {}
+        delta_row = self.sqlite.conn.execute(
+            "SELECT state_delta_json FROM decisions WHERE organization_id=? AND event_id=? ORDER BY created_at DESC LIMIT 1",
+            (self.config.organization_id, event_id),
+        ).fetchone()
+        import json
+        state_delta = json.loads(delta_row["state_delta_json"]) if delta_row else {}
+        signals, signal_ids = self.signal_support.record(
+            event_id, result.get("trajectory_id"), state_delta, trajectory_state
+        )
+        result["signals"] = signals
+        result["signal_ids"] = signal_ids
+        result["instrumentation"] = instrumentation(
+            result,
+            trajectory_row["trajectory_version"] if trajectory_row else None,
+        )
 
         self.sqlite.complete_event(
             organization_id=self.config.organization_id,
