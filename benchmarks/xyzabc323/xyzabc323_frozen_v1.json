@@ -1,0 +1,977 @@
+[
+  {
+    "event_id": "huser_01_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_01",
+    "surface": "slack",
+    "conversation_id": "huser_01_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-701: checkout certificate rejected"
+    },
+    "_gold_work": "INC-701",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_01_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_01",
+    "surface": "mcp",
+    "conversation_id": "huser_01_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-701 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-701",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_02_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_02",
+    "surface": "slack",
+    "conversation_id": "huser_02_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-702: checkout certificate rejected"
+    },
+    "_gold_work": "INC-702",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_02_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_02",
+    "surface": "mcp",
+    "conversation_id": "huser_02_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-702 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-702",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_03_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_03",
+    "surface": "slack",
+    "conversation_id": "huser_03_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-703: checkout certificate rejected"
+    },
+    "_gold_work": "INC-703",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_03_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_03",
+    "surface": "mcp",
+    "conversation_id": "huser_03_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-703 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-703",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_04_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_04",
+    "surface": "slack",
+    "conversation_id": "huser_04_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-704: checkout certificate rejected"
+    },
+    "_gold_work": "INC-704",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_04_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_04",
+    "surface": "mcp",
+    "conversation_id": "huser_04_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-704 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-704",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_05_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_05",
+    "surface": "slack",
+    "conversation_id": "huser_05_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-705: checkout certificate rejected"
+    },
+    "_gold_work": "INC-705",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_05_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_05",
+    "surface": "mcp",
+    "conversation_id": "huser_05_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-705 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-705",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_06_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_06",
+    "surface": "slack",
+    "conversation_id": "huser_06_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-706: checkout certificate rejected"
+    },
+    "_gold_work": "INC-706",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_06_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_06",
+    "surface": "mcp",
+    "conversation_id": "huser_06_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-706 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-706",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_07_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_07",
+    "surface": "slack",
+    "conversation_id": "huser_07_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-707: checkout certificate rejected"
+    },
+    "_gold_work": "INC-707",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_07_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_07",
+    "surface": "mcp",
+    "conversation_id": "huser_07_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-707 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-707",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_08_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_08",
+    "surface": "slack",
+    "conversation_id": "huser_08_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-708: checkout certificate rejected"
+    },
+    "_gold_work": "INC-708",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_08_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_08",
+    "surface": "mcp",
+    "conversation_id": "huser_08_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-708 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-708",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_09_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_09",
+    "surface": "slack",
+    "conversation_id": "huser_09_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-709: checkout certificate rejected"
+    },
+    "_gold_work": "INC-709",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_09_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_09",
+    "surface": "mcp",
+    "conversation_id": "huser_09_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-709 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-709",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_10_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_10",
+    "surface": "slack",
+    "conversation_id": "huser_10_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigate incident INC-710: checkout certificate rejected"
+    },
+    "_gold_work": "INC-710",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_10_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_10",
+    "surface": "mcp",
+    "conversation_id": "huser_10_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "INC-710 is still blocking checkout after certificate rotation"
+    },
+    "_gold_work": "INC-710",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_11_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_11",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_11_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-811: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-811",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_11_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_11",
+    "surface": "slack",
+    "conversation_id": "huser_11_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-811",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_12_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_12",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_12_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-812: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-812",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_12_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_12",
+    "surface": "slack",
+    "conversation_id": "huser_12_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-812",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_13_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_13",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_13_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-813: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-813",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_13_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_13",
+    "surface": "slack",
+    "conversation_id": "huser_13_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-813",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_14_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_14",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_14_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-814: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-814",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_14_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_14",
+    "surface": "slack",
+    "conversation_id": "huser_14_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-814",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_15_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_15",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_15_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-815: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-815",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_15_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_15",
+    "surface": "slack",
+    "conversation_id": "huser_15_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-815",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_16_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_16",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_16_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-816: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-816",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_16_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_16",
+    "surface": "slack",
+    "conversation_id": "huser_16_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-816",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_17_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_17",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_17_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-817: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-817",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_17_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_17",
+    "surface": "slack",
+    "conversation_id": "huser_17_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-817",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_18_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_18",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_18_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-818: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-818",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_18_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_18",
+    "surface": "slack",
+    "conversation_id": "huser_18_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-818",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_19_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_19",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_19_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-819: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-819",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_19_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_19",
+    "surface": "slack",
+    "conversation_id": "huser_19_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-819",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "huser_20_1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_20",
+    "surface": "generic_chatbot",
+    "conversation_id": "huser_20_1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Open OPS-820: nightly inventory export is missing records"
+    },
+    "_gold_work": "OPS-820",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "huser_20_2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "huser_20",
+    "surface": "slack",
+    "conversation_id": "huser_20_2_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "the inventory export is still missing rows after the backfill"
+    },
+    "_gold_work": "OPS-820",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "similar_01_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_01",
+    "surface": "slack",
+    "conversation_id": "similar_01_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee SSO login redirects forever in production"
+    },
+    "_gold_work": "AUTH-A-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_01_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "similar_01_b_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "customer portal login redirects forever in production; separate incident"
+    },
+    "_gold_work": "AUTH-B-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_02_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_02",
+    "surface": "slack",
+    "conversation_id": "similar_02_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee SSO login redirects forever in production"
+    },
+    "_gold_work": "AUTH-A-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_02_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "similar_02_b_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "customer portal login redirects forever in production; separate incident"
+    },
+    "_gold_work": "AUTH-B-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_03_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_03",
+    "surface": "slack",
+    "conversation_id": "similar_03_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee SSO login redirects forever in production"
+    },
+    "_gold_work": "AUTH-A-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_03_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "similar_03_b_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "customer portal login redirects forever in production; separate incident"
+    },
+    "_gold_work": "AUTH-B-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_04_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_04",
+    "surface": "slack",
+    "conversation_id": "similar_04_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee SSO login redirects forever in production"
+    },
+    "_gold_work": "AUTH-A-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_04_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "similar_04_b_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "customer portal login redirects forever in production; separate incident"
+    },
+    "_gold_work": "AUTH-B-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_05_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_05",
+    "surface": "slack",
+    "conversation_id": "similar_05_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee SSO login redirects forever in production"
+    },
+    "_gold_work": "AUTH-A-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "similar_05_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "similar_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "similar_05_b_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "customer portal login redirects forever in production; separate incident"
+    },
+    "_gold_work": "AUTH-B-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_1_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "agent_01",
+    "surface": "slack",
+    "conversation_id": "shared_1_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Working on CASE-901; payment service returns certificate warning"
+    },
+    "_gold_work": "CASE-901",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_1_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "owner_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "shared_1_b_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "CASE-901 still has the payment certificate warning"
+    },
+    "_gold_work": "CASE-901",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "shared_2_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "agent_02",
+    "surface": "slack",
+    "conversation_id": "shared_2_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Working on CASE-902; payment service returns certificate warning"
+    },
+    "_gold_work": "CASE-902",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_2_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "owner_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "shared_2_b_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "CASE-902 still has the payment certificate warning"
+    },
+    "_gold_work": "CASE-902",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "shared_3_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "agent_03",
+    "surface": "slack",
+    "conversation_id": "shared_3_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Working on CASE-903; payment service returns certificate warning"
+    },
+    "_gold_work": "CASE-903",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_3_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "owner_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "shared_3_b_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "CASE-903 still has the payment certificate warning"
+    },
+    "_gold_work": "CASE-903",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "shared_4_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "agent_04",
+    "surface": "slack",
+    "conversation_id": "shared_4_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Working on CASE-904; payment service returns certificate warning"
+    },
+    "_gold_work": "CASE-904",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_4_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "owner_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "shared_4_b_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "CASE-904 still has the payment certificate warning"
+    },
+    "_gold_work": "CASE-904",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "shared_5_a",
+    "workspace_id": "heldout-production",
+    "external_user_id": "agent_05",
+    "surface": "slack",
+    "conversation_id": "shared_5_a_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "Working on CASE-905; payment service returns certificate warning"
+    },
+    "_gold_work": "CASE-905",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "shared_5_b",
+    "workspace_id": "heldout-production",
+    "external_user_id": "owner_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "shared_5_b_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "CASE-905 still has the payment certificate warning"
+    },
+    "_gold_work": "CASE-905",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "sparse_01_base1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_01",
+    "surface": "slack",
+    "conversation_id": "sparse_01_base1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "production deployment is failing certificate validation"
+    },
+    "_gold_work": "DEP-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_01_base2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "sparse_01_base2_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee login is failing after the identity provider change"
+    },
+    "_gold_work": "LOGIN-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_01_amb",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_01",
+    "surface": "mcp",
+    "conversation_id": "sparse_01_amb_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "same thing is broken again after that change"
+    },
+    "_gold_work": "AMB-1",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "sparse_02_base1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_02",
+    "surface": "slack",
+    "conversation_id": "sparse_02_base1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "production deployment is failing certificate validation"
+    },
+    "_gold_work": "DEP-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_02_base2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "sparse_02_base2_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee login is failing after the identity provider change"
+    },
+    "_gold_work": "LOGIN-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_02_amb",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_02",
+    "surface": "mcp",
+    "conversation_id": "sparse_02_amb_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "same thing is broken again after that change"
+    },
+    "_gold_work": "AMB-2",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "sparse_03_base1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_03",
+    "surface": "slack",
+    "conversation_id": "sparse_03_base1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "production deployment is failing certificate validation"
+    },
+    "_gold_work": "DEP-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_03_base2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "sparse_03_base2_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee login is failing after the identity provider change"
+    },
+    "_gold_work": "LOGIN-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_03_amb",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_03",
+    "surface": "mcp",
+    "conversation_id": "sparse_03_amb_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "same thing is broken again after that change"
+    },
+    "_gold_work": "AMB-3",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "sparse_04_base1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_04",
+    "surface": "slack",
+    "conversation_id": "sparse_04_base1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "production deployment is failing certificate validation"
+    },
+    "_gold_work": "DEP-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_04_base2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "sparse_04_base2_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee login is failing after the identity provider change"
+    },
+    "_gold_work": "LOGIN-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_04_amb",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_04",
+    "surface": "mcp",
+    "conversation_id": "sparse_04_amb_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "same thing is broken again after that change"
+    },
+    "_gold_work": "AMB-4",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "sparse_05_base1",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_05",
+    "surface": "slack",
+    "conversation_id": "sparse_05_base1_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "production deployment is failing certificate validation"
+    },
+    "_gold_work": "DEP-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_05_base2",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "sparse_05_base2_conv",
+    "source_sequence": "1",
+    "content": {
+      "text": "employee login is failing after the identity provider change"
+    },
+    "_gold_work": "LOGIN-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sparse_05_amb",
+    "workspace_id": "heldout-production",
+    "external_user_id": "sparse_05",
+    "surface": "mcp",
+    "conversation_id": "sparse_05_amb_conv",
+    "source_sequence": "2",
+    "content": {
+      "text": "same thing is broken again after that change"
+    },
+    "_gold_work": "AMB-5",
+    "_gold_relation": "clarify"
+  }
+]
