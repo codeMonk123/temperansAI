@@ -64,3 +64,8 @@ ttlb_v2_semantic_mock_cache.jsonl
 ttlb_v2_semantic_gemini_cache.jsonl
 ttlb_v2_semantic_safe_raw.jsonl
 .temperans/
+
+# Generated Temperans validation artifacts
+xyzabc321_*_report.json
+xyzabc321_*_audit*.json
+xyzabc321_hybrid_replay_v1.json
