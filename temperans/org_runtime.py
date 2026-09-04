@@ -186,6 +186,81 @@ class OrganizationRuntime:
         )
         return result
 
+    def reject_proposal(self, proposal_id):
+        row = self.sqlite.get_pending_proposal(organization_id=self.config.organization_id, proposal_id=proposal_id)
+        if row is None: raise KeyError("proposal not found")
+        if row["status"] == "rejected": return row
+        if row["status"] != "pending": raise ValueError("proposal is not pending")
+        return self.sqlite.resolve_pending_proposal(organization_id=self.config.organization_id, proposal_id=proposal_id, status="rejected")
+
+    def confirm_proposal(self, proposal_id):
+        row = self.sqlite.get_pending_proposal(organization_id=self.config.organization_id, proposal_id=proposal_id)
+        if row is None: raise KeyError("proposal not found")
+        if row["status"] == "confirmed": return row
+        if row["status"] != "pending": raise ValueError("proposal is not pending")
+        proposed_decision=row["proposed_decision"]
+        proposed_tid=row["proposed_trajectory_id"]
+        if proposed_tid and row["base_trajectory_version"] is not None:
+            current=self.sqlite.get_trajectory(organization_id=self.config.organization_id, trajectory_id=proposed_tid)
+            if current is None or current["trajectory_version"] != row["base_trajectory_version"]:
+                return self.sqlite.resolve_pending_proposal(organization_id=self.config.organization_id, proposal_id=proposal_id, status="stale")
+        service_payload = dict(row["service_payload"])
+
+        # Pending proposals cross a JSON persistence boundary. Re-run the
+        # canonical extractor so anchors are restored as typed Anchor objects
+        # instead of persisted JSON dictionaries/strings.
+        work = self.extractor.extract(
+            text=service_payload.get("current_problem", ""),
+            supplied_goal=service_payload.get("goal", ""),
+            entities=service_payload.get("entities", []),
+            artifacts=service_payload.get("artifacts", []),
+        )
+        service_payload["goal"] = work.goal
+        service_payload["current_problem"] = work.current_problem
+        service_payload["entities"] = work.entities
+        service_payload["artifacts"] = work.artifacts
+        service_payload["anchors"] = work.anchors
+
+        fresh=self.service.propose(service_payload)
+        same_proposal = fresh.get("decision") == proposed_decision
+        # NEW proposals create a fresh synthetic trajectory id on every
+        # non-mutating evaluation. Identity equality is therefore undefined
+        # until authoritative application. Existing-trajectory actions must
+        # retain exact candidate identity.
+        if proposed_decision in {"attach", "branch"}:
+            same_proposal = (
+                same_proposal
+                and fresh.get("trajectory_id") == proposed_tid
+            )
+        if not same_proposal:
+            return self.sqlite.resolve_pending_proposal(
+                organization_id=self.config.organization_id,
+                proposal_id=proposal_id,
+                status="stale",
+            )
+        # Decision persistence has a foreign key to events. Confirmation is
+        # an action on the already-persisted advisory event, not a synthetic
+        # second ingestion event, so persist the authoritative decision against
+        # the original event_id.
+        confirm_event_id = row["event_id"]
+        result=observe_with_concurrency_recovery(
+            self.service,
+            service_payload,
+            confirm_event_id,
+            max_retries=1,
+        )
+        authoritative_match = result.get("decision") == proposed_decision
+        if proposed_decision in {"attach", "branch"}:
+            authoritative_match = (
+                authoritative_match
+                and result.get("trajectory_id") == proposed_tid
+            )
+        if not authoritative_match:
+            raise RuntimeError(
+                "authoritative confirmation diverged from revalidated proposal"
+            )
+        return self.sqlite.resolve_pending_proposal(organization_id=self.config.organization_id, proposal_id=proposal_id, status="confirmed")
+
     def link_identity(self, *, workspace_id, surface, external_user_id, person_id):
         return self.identities.link(
             workspace_id,

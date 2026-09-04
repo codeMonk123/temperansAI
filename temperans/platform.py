@@ -120,6 +120,16 @@ class TemperansPlatform:
 
         return runtime
 
+    def confirm_proposal_with_key(self, *, api_key, proposal_id):
+        config=self.authenticate(api_key)
+        if config is None: raise PermissionError("invalid API key")
+        return self.runtime(config.organization_id).confirm_proposal(proposal_id)
+
+    def reject_proposal_with_key(self, *, api_key, proposal_id):
+        config=self.authenticate(api_key)
+        if config is None: raise PermissionError("invalid API key")
+        return self.runtime(config.organization_id).reject_proposal(proposal_id)
+
     def observe_with_key(
         self,
         *,
