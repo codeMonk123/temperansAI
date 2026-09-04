@@ -69,3 +69,9 @@ ttlb_v2_semantic_safe_raw.jsonl
 xyzabc321_*_report.json
 xyzabc321_*_audit*.json
 xyzabc321_hybrid_replay_v1.json
+
+# Temperans generated validation outputs
+xyzabc321_*diagnostic.json
+xyzabc321_*result.json
+xyzabc321_k3_raw_actions.json
+xyzabc323_one_shot_result.json
