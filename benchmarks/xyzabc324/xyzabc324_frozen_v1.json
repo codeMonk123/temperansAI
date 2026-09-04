@@ -1,0 +1,1107 @@
+[
+  {
+    "event_id": "vuser_01_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_01_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1101; invoice generation times out"
+    },
+    "_gold_work": "BUG-1101",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_01_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_01",
+    "surface": "slack",
+    "conversation_id": "vuser_01_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1101 continues to block invoices"
+    },
+    "_gold_work": "BUG-1101",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_02_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_02_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1102; invoice generation times out"
+    },
+    "_gold_work": "BUG-1102",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_02_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_02",
+    "surface": "slack",
+    "conversation_id": "vuser_02_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1102 continues to block invoices"
+    },
+    "_gold_work": "BUG-1102",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_03_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_03_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1103; invoice generation times out"
+    },
+    "_gold_work": "BUG-1103",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_03_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_03",
+    "surface": "slack",
+    "conversation_id": "vuser_03_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1103 continues to block invoices"
+    },
+    "_gold_work": "BUG-1103",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_04_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_04_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1104; invoice generation times out"
+    },
+    "_gold_work": "BUG-1104",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_04_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_04",
+    "surface": "slack",
+    "conversation_id": "vuser_04_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1104 continues to block invoices"
+    },
+    "_gold_work": "BUG-1104",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_05_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_05_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1105; invoice generation times out"
+    },
+    "_gold_work": "BUG-1105",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_05_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_05",
+    "surface": "slack",
+    "conversation_id": "vuser_05_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1105 continues to block invoices"
+    },
+    "_gold_work": "BUG-1105",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_06_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_06",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_06_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1106; invoice generation times out"
+    },
+    "_gold_work": "BUG-1106",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_06_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_06",
+    "surface": "slack",
+    "conversation_id": "vuser_06_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1106 continues to block invoices"
+    },
+    "_gold_work": "BUG-1106",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_07_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_07",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_07_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1107; invoice generation times out"
+    },
+    "_gold_work": "BUG-1107",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_07_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_07",
+    "surface": "slack",
+    "conversation_id": "vuser_07_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1107 continues to block invoices"
+    },
+    "_gold_work": "BUG-1107",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_08_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_08",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_08_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1108; invoice generation times out"
+    },
+    "_gold_work": "BUG-1108",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_08_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_08",
+    "surface": "slack",
+    "conversation_id": "vuser_08_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1108 continues to block invoices"
+    },
+    "_gold_work": "BUG-1108",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_09_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_09",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_09_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1109; invoice generation times out"
+    },
+    "_gold_work": "BUG-1109",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_09_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_09",
+    "surface": "slack",
+    "conversation_id": "vuser_09_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1109 continues to block invoices"
+    },
+    "_gold_work": "BUG-1109",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_10_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_10",
+    "surface": "generic_chatbot",
+    "conversation_id": "vuser_10_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Please investigate BUG-1110; invoice generation times out"
+    },
+    "_gold_work": "BUG-1110",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_10_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_10",
+    "surface": "slack",
+    "conversation_id": "vuser_10_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "After the worker restart, BUG-1110 continues to block invoices"
+    },
+    "_gold_work": "BUG-1110",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_11_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_11",
+    "surface": "slack",
+    "conversation_id": "vuser_11_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1211: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1211",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_11_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_11",
+    "surface": "mcp",
+    "conversation_id": "vuser_11_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1211",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_12_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_12",
+    "surface": "slack",
+    "conversation_id": "vuser_12_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1212: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1212",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_12_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_12",
+    "surface": "mcp",
+    "conversation_id": "vuser_12_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1212",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_13_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_13",
+    "surface": "slack",
+    "conversation_id": "vuser_13_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1213: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1213",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_13_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_13",
+    "surface": "mcp",
+    "conversation_id": "vuser_13_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1213",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_14_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_14",
+    "surface": "slack",
+    "conversation_id": "vuser_14_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1214: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1214",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_14_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_14",
+    "surface": "mcp",
+    "conversation_id": "vuser_14_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1214",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_15_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_15",
+    "surface": "slack",
+    "conversation_id": "vuser_15_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1215: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1215",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_15_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_15",
+    "surface": "mcp",
+    "conversation_id": "vuser_15_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1215",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_16_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_16",
+    "surface": "slack",
+    "conversation_id": "vuser_16_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1216: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1216",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_16_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_16",
+    "surface": "mcp",
+    "conversation_id": "vuser_16_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1216",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_17_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_17",
+    "surface": "slack",
+    "conversation_id": "vuser_17_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1217: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1217",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_17_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_17",
+    "surface": "mcp",
+    "conversation_id": "vuser_17_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1217",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_18_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_18",
+    "surface": "slack",
+    "conversation_id": "vuser_18_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1218: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1218",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_18_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_18",
+    "surface": "mcp",
+    "conversation_id": "vuser_18_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1218",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_19_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_19",
+    "surface": "slack",
+    "conversation_id": "vuser_19_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1219: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1219",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_19_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_19",
+    "surface": "mcp",
+    "conversation_id": "vuser_19_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1219",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "vuser_20_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_20",
+    "surface": "slack",
+    "conversation_id": "vuser_20_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Track JOB-1220: catalog synchronization skips recently edited products"
+    },
+    "_gold_work": "JOB-1220",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "vuser_20_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "vuser_20",
+    "surface": "mcp",
+    "conversation_id": "vuser_20_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "the catalog sync still skips edited products after the retry"
+    },
+    "_gold_work": "JOB-1220",
+    "_gold_relation": "attach"
+  },
+  {
+    "event_id": "sep_01_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_01",
+    "surface": "slack",
+    "conversation_id": "sep_01_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_01_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_01_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_02_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_02",
+    "surface": "slack",
+    "conversation_id": "sep_02_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_02_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_02_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_03_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_03",
+    "surface": "slack",
+    "conversation_id": "sep_03_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_03_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_03_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_04_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_04",
+    "surface": "slack",
+    "conversation_id": "sep_04_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_04_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_04_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_05_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_05",
+    "surface": "slack",
+    "conversation_id": "sep_05_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_05_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_05_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_06_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_06",
+    "surface": "slack",
+    "conversation_id": "sep_06_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-6",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_06_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_06",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_06_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-6",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_07_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_07",
+    "surface": "slack",
+    "conversation_id": "sep_07_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-7",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_07_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_07",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_07_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-7",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_08_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_08",
+    "surface": "slack",
+    "conversation_id": "sep_08_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-8",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_08_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_08",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_08_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-8",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_09_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_09",
+    "surface": "slack",
+    "conversation_id": "sep_09_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-9",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_09_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_09",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_09_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-9",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_10_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_10",
+    "surface": "slack",
+    "conversation_id": "sep_10_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for subscription renewals"
+    },
+    "_gold_work": "PAY-A-10",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "sep_10_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "sep_10",
+    "surface": "generic_chatbot",
+    "conversation_id": "sep_10_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "payment authorization fails for marketplace orders; separate issue"
+    },
+    "_gold_work": "PAY-B-10",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_1_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "support_1",
+    "surface": "slack",
+    "conversation_id": "cp_1_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigating SUP-1301: export endpoint returns 502"
+    },
+    "_gold_work": "SUP-1301",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_1_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "owner_1",
+    "surface": "generic_chatbot",
+    "conversation_id": "cp_1_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "SUP-1301 export endpoint still returns 502"
+    },
+    "_gold_work": "SUP-1301",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "cp_2_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "support_2",
+    "surface": "slack",
+    "conversation_id": "cp_2_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigating SUP-1302: export endpoint returns 502"
+    },
+    "_gold_work": "SUP-1302",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_2_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "owner_2",
+    "surface": "generic_chatbot",
+    "conversation_id": "cp_2_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "SUP-1302 export endpoint still returns 502"
+    },
+    "_gold_work": "SUP-1302",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "cp_3_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "support_3",
+    "surface": "slack",
+    "conversation_id": "cp_3_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigating SUP-1303: export endpoint returns 502"
+    },
+    "_gold_work": "SUP-1303",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_3_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "owner_3",
+    "surface": "generic_chatbot",
+    "conversation_id": "cp_3_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "SUP-1303 export endpoint still returns 502"
+    },
+    "_gold_work": "SUP-1303",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "cp_4_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "support_4",
+    "surface": "slack",
+    "conversation_id": "cp_4_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigating SUP-1304: export endpoint returns 502"
+    },
+    "_gold_work": "SUP-1304",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_4_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "owner_4",
+    "surface": "generic_chatbot",
+    "conversation_id": "cp_4_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "SUP-1304 export endpoint still returns 502"
+    },
+    "_gold_work": "SUP-1304",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "cp_5_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "support_5",
+    "surface": "slack",
+    "conversation_id": "cp_5_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "Investigating SUP-1305: export endpoint returns 502"
+    },
+    "_gold_work": "SUP-1305",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "cp_5_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "owner_5",
+    "surface": "generic_chatbot",
+    "conversation_id": "cp_5_b_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "SUP-1305 export endpoint still returns 502"
+    },
+    "_gold_work": "SUP-1305",
+    "_gold_relation": "ambiguous_cross_person"
+  },
+  {
+    "event_id": "amb_01_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_01",
+    "surface": "slack",
+    "conversation_id": "amb_01_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "search indexing is delayed after ingestion"
+    },
+    "_gold_work": "SEARCH-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_01_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_01",
+    "surface": "generic_chatbot",
+    "conversation_id": "amb_01_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "email delivery is delayed after queue ingestion"
+    },
+    "_gold_work": "MAIL-1",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_01_c",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_01",
+    "surface": "mcp",
+    "conversation_id": "amb_01_c_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "it is delayed again after that change"
+    },
+    "_gold_work": "AMB-1",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "amb_02_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_02",
+    "surface": "slack",
+    "conversation_id": "amb_02_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "search indexing is delayed after ingestion"
+    },
+    "_gold_work": "SEARCH-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_02_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_02",
+    "surface": "generic_chatbot",
+    "conversation_id": "amb_02_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "email delivery is delayed after queue ingestion"
+    },
+    "_gold_work": "MAIL-2",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_02_c",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_02",
+    "surface": "mcp",
+    "conversation_id": "amb_02_c_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "it is delayed again after that change"
+    },
+    "_gold_work": "AMB-2",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "amb_03_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_03",
+    "surface": "slack",
+    "conversation_id": "amb_03_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "search indexing is delayed after ingestion"
+    },
+    "_gold_work": "SEARCH-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_03_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_03",
+    "surface": "generic_chatbot",
+    "conversation_id": "amb_03_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "email delivery is delayed after queue ingestion"
+    },
+    "_gold_work": "MAIL-3",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_03_c",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_03",
+    "surface": "mcp",
+    "conversation_id": "amb_03_c_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "it is delayed again after that change"
+    },
+    "_gold_work": "AMB-3",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "amb_04_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_04",
+    "surface": "slack",
+    "conversation_id": "amb_04_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "search indexing is delayed after ingestion"
+    },
+    "_gold_work": "SEARCH-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_04_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_04",
+    "surface": "generic_chatbot",
+    "conversation_id": "amb_04_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "email delivery is delayed after queue ingestion"
+    },
+    "_gold_work": "MAIL-4",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_04_c",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_04",
+    "surface": "mcp",
+    "conversation_id": "amb_04_c_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "it is delayed again after that change"
+    },
+    "_gold_work": "AMB-4",
+    "_gold_relation": "clarify"
+  },
+  {
+    "event_id": "amb_05_a",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_05",
+    "surface": "slack",
+    "conversation_id": "amb_05_a_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "search indexing is delayed after ingestion"
+    },
+    "_gold_work": "SEARCH-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_05_b",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_05",
+    "surface": "generic_chatbot",
+    "conversation_id": "amb_05_b_thread",
+    "source_sequence": "1",
+    "content": {
+      "text": "email delivery is delayed after queue ingestion"
+    },
+    "_gold_work": "MAIL-5",
+    "_gold_relation": "new"
+  },
+  {
+    "event_id": "amb_05_c",
+    "workspace_id": "validation-prod",
+    "external_user_id": "amb_05",
+    "surface": "mcp",
+    "conversation_id": "amb_05_c_thread",
+    "source_sequence": "2",
+    "content": {
+      "text": "it is delayed again after that change"
+    },
+    "_gold_work": "AMB-5",
+    "_gold_relation": "clarify"
+  }
+]
